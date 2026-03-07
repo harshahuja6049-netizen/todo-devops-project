@@ -3,5 +3,4 @@ node_modules
 dist
 build
 .git
-Dockerfile*
 docker-compose*
