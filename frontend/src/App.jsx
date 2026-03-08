@@ -1,8 +1,9 @@
-// frontend/src/App.jsx
 import { useState, useEffect } from 'react';
 import './App.css';
 
-const API_URL = 'http://localhost:5000';
+// API calls will go through the nginx proxy at the same origin.
+// The proxy will forward requests starting with /api/ to the backend service.
+const API_URL = ''; // empty string = current origin (e.g., http://<node-ip>:30007)
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -17,7 +18,7 @@ function App() {
   const fetchTodos = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_URL}/todos`);
+      const response = await fetch(`${API_URL}/api/todos`);  // <-- added /api prefix
       if (!response.ok) throw new Error('Failed to fetch todos');
       const data = await response.json();
       setTodos(data);
@@ -33,7 +34,7 @@ function App() {
     if (!newTodo.trim()) return;
 
     try {
-      const response = await fetch(`${API_URL}/todos`, {
+      const response = await fetch(`${API_URL}/api/todos`, {  // <-- added /api prefix
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: newTodo })
@@ -49,7 +50,7 @@ function App() {
 
   const toggleTodo = async (id, completed) => {
     try {
-      const response = await fetch(`${API_URL}/todos/${id}`, {
+      const response = await fetch(`${API_URL}/api/todos/${id}`, {  // <-- added /api prefix
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ completed: !completed })
@@ -64,7 +65,7 @@ function App() {
 
   const deleteTodo = async (id) => {
     try {
-      const response = await fetch(`${API_URL}/todos/${id}`, {
+      const response = await fetch(`${API_URL}/api/todos/${id}`, {  // <-- added /api prefix
         method: 'DELETE'
       });
       if (!response.ok) throw new Error('Failed to delete todo');
