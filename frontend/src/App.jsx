@@ -82,7 +82,7 @@ function App() {
     <div className="app">
       <header className="app-header">
         <h1>✨ Todo List</h1>
-        <p>Stay organized, get things done </p>
+        <p>Stay organized, get things done easily </p>
       </header>
 
       <main className="app-main">
