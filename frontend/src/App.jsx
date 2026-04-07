@@ -81,7 +81,7 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>✨ Todo List</h1>
+        <h1>✨ Todo List App</h1>
         <p>Stay organized, get things done easily </p>
       </header>
 
